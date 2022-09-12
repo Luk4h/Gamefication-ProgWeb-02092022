@@ -1,0 +1,129 @@
+<html lang="br">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Inter" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script> 
+    <script>
+      window.onload = function() {
+        var Carros = localStorage.getItem("Carros");
+        if ( Carros == null || Carros.length < 3) { console.log("No Cars"); showNoCars()} else { showCars( Carros)}
+      };
+    </script>
+  </head>
+  <body>
+    <div class=Cabecalho>
+      <div class=Botoes>
+        <div class=Buscar>
+          <input type="text" id="fname" name="fname" placeholder="Buscar veículos">
+        </div>
+        <button class=Adicionar onclick="openForm()">
+          Novo veículo
+        </button>
+      </div>
+    </div>
+    <div class=Tabela id="Tabela">
+      <div class=Colunas>
+        <span  class="Coluna-Header Marca">Marca</span>
+        <span  class="Coluna-Header Modelo">Modelo</span>
+        <span  class="Coluna-Header Ano">Ano</span>
+        <span  class="Coluna-Header">Opções</span>
+      </div>
+    </div>
+
+    <div class=Pop-Up style="display: none;">
+      <form id="Novo-Carro">
+        <h1>Adicionar novo veículo</h1>
+        <span>Por favor adicione as informações do veículo que você deseja cadastrar.</span>
+        <br><br><br><br>
+        <div class="Form-Row">
+          <label for="Marca">Marca</label>
+          <select class="Input-Pop-Up" name="Input-Marca" id="Marca">
+            <option value="Toyota">Toyota</option>
+            <option value="Volkswagen">Volkswagen</option>
+            <option value="Honda">Honda</option>
+            <option value="Ford">Ford</option>
+            <option value="Chevrolet">Chevrolet</option>
+          </select>
+        </div>
+        <div class="Form-Row">
+          <label for="Modelo">Modelo</label>
+          <input class="Input-Pop-Up" id="Modelo" type="Modelo" placeholder="457" name="Input-Modelo" maxlength="100" required>
+        </div>
+        <div class="Form-Row">
+          <label for="Versão">Versão</label>
+          <input class="Input-Pop-Up" id="Versão" type="Versão" placeholder="GTI" name="Input-Versão" maxlength="100" required>
+        </div>
+        <div class="Form-Row">
+          <label for="Quilometragem">Quilometragem</label>
+          <input class="Input-Pop-Up" id="Quilometragem" type="Quilometragem" placeholder="3500 Km" name="Input-Quilometragem" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+        </div>
+        <div class="Form-Row">
+          <label for="Ano">Ano</label>
+          <input class="Input-Pop-Up" id="Ano" type="Ano" placeholder="2021/2022" name="Input-Ano" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+        </div>
+        <div class="Form-Row">
+          <label for="Preço">Preço</label>
+          <input class="Input-Pop-Up"id="Preço" type="Preço" placeholder="R$ 99.999,00" name="Input-Preço" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+        </div>
+        <div class="Form-Row">
+          <label for="Cor">Cor</label>
+          <select class="Select-Pop-Up" name="Cores" id="Cores">
+            <option value="Azul">Azul</option>
+            <option value="Bege">Bege</option>
+            <option value="Branco">Branco</option>
+            <option value="Cinza">Cinza</option>
+            <option value="Marrom">Marrom</option>
+            <option value="Prata">Prata</option>
+            <option value="Preto">Preto</option>
+            <option value="Vermelho">Vermelho</option>
+          </select>
+        </div>
+        <div class="Form-Row">
+          <label><input type="checkbox" id="Airbag">
+          <div class="Checkbox">Airbag</div></label>
+          <label><input type="checkbox" id="Alarme">
+          <div class="Checkbox">Alarme</div></label>
+          <label><input type="checkbox" id="Ar condicionado">
+          <div class="Checkbox">Ar condicionado</div></label>
+          <label><input type="checkbox" id="Bancos em couro">
+          <div class="Checkbox">Bancos em couro</div></label>
+          <label><input type="checkbox" id="Computador de bordo">
+          <div class="Checkbox">Computador de bordo</div></label>
+          <label><input type="checkbox" id="Controle automático de velocidade">
+          <div class="Checkbox">Controle automático de velocidade</div></label>
+          <label><input type="checkbox" id="Controle de tração">
+          <div class="Checkbox">Controle de tração</div></label>
+        </div>
+        <div class="Form-Row">
+          <label><input type="checkbox" id="Direção hidráulica">
+          <div class="Checkbox">Direção hidráulica</div></label>
+          <label><input type="checkbox" id="Freio abs">
+          <div class="Checkbox">Freio abs</div></label>
+          <label><input type="checkbox" id="Rodas de liga leve">
+          <div class="Checkbox">Rodas de liga leve</div></label>
+          <label><input type="checkbox" id="Sensor de chuva">
+          <div class="Checkbox">Computador de bordo</div></label>
+          <label><input type="checkbox" id="Sensor de estacionamento">
+          <div class="Checkbox">Sensor de estacionamento</div></label>
+          <label><input type="checkbox" id="Teto solar">
+          <div class="Checkbox">Teto solar</div></label>
+          <label><input type="checkbox" id="Vidros elétricos">
+          <div class="Checkbox">Vidros elétricos</div></label>
+        </div>
+        <div class="Form-Row Radio">
+          <label for="Blindado"><input type="radio" id="Blindado" name="Blindado" value="Blindado"><div class="Checkbox Checkbox-Radio">Blindado</div></label><br>
+          <label for="NotBlindado"><input type="radio" id="NotBlindado" name="Blindado" value="NotBlindado"><div class="Checkbox Checkbox-Radio">Sem blindagem</div></label><br>
+        </div>
+        <div class="Form-Row">
+          <button id="Cadastrar-Carro" class=Adicionar onclick="saveCar()">
+            Cadastrar
+          </button>
+          <button class="Adicionar Cancelar" onclick="closeForm()">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
